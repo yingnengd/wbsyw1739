@@ -77,7 +77,7 @@ RUN apk add --no-cache python3 \
 	&& apk add chromium chromium-chromedriver \
 	&& pip install requests selenium \
 	&& pip install flask \ 
-	&& pip install flask_apscheduler
+	&& pip install flask_apscheduler traceback
 
 		
 #CMD [ "/wb/unview.sh" ]
