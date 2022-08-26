@@ -4,7 +4,8 @@ from selenium.webdriver.chrome.options import Options
 import time
 from selenium.webdriver.common.by import By
 import json,os
-import random,traceback
+import random
+import traceback2 as traceback
 # import psutil
 import re,os,requests
 from selenium.webdriver.common.action_chains import ActionChains
