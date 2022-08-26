@@ -285,8 +285,7 @@ class WebDriver(DriverOptions):
                 zzf = driver.find_element(By.XPATH,'.//a[@class="s-btn-a"]')
                 driver.execute_script("arguments[0].click();", zzf)
                 print("转发成功")
-        except:pass
-        driver.quit()
+        except:driver.quit()
 
     def pic_list(self):
         time.sleep(1)
