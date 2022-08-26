@@ -56,21 +56,18 @@ app.config.from_object(Config())  # 为实例化的flask引入配置
 
 @app.route('/')  # 首页路由
 def index():  # 首页视图函数，就返回个hello
-    r0 = random.randint(3,18)
+    r0 = random.randint(3,9)
     t0 = [random.randint(1,50) for n in range(r0)]#随机生成n个50以内的数
     for i in range(50):
         if i not in t0:continue
-        driver.selenium_chrome_test()
-        time.sleep(random.uniform(10,60))
-        driver.zhuan_fa()
-        time.sleep(random.uniform(10,60))
-        driver.json_save()
-        time.sleep(random.uniform(10,60))
+    driver.selenium_chrome_test()
+    time.sleep(random.uniform(10,20))
+    driver.zhuan_fa()
+    driver.json_save()
 
     driver.pic_list()
-    time.sleep(random.uniform(10,60))
     driver.ji_tang()
-    time.sleep(random.uniform(10,60))
+    time.sleep(random.uniform(10,20))
 
 if __name__ == '__main__':
     scheduler = APScheduler()  # 实例化APScheduler

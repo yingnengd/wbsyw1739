@@ -221,8 +221,9 @@ class WebDriver(DriverOptions):
             time.sleep(10)
             if driver.find_element(By.XPATH, './/div[@class="card-more-a"]') is not None:
                 # 点击更多评论
-                driver.find_element(By.XPATH, './/div[@class="card-more-a"]//a').click()
                 time.sleep(10)
+                driver.find_element(By.XPATH, './/div[@class="card-more-a"]//a').click()
+                time.sleep(2)
                 if driver.find_element(By.XPATH, '//div[@class="item1in woo-box-flex"]') is not None:
                     time.sleep(5)
                 #下滚并获取目标数量100个评论最底端
@@ -258,9 +259,11 @@ class WebDriver(DriverOptions):
                     # self.broswer.execute_script("arguments[0].scrollIntoView(true);", target)
                     #发文
                     if d == "":
+                        time.sleep(1)
                         driver.find_element(By.XPATH,'.//textarea[@class="Form_input_3JT2Q"]').send_keys("转发微博")
                         time.sleep(5)
                     else:
+                        time.sleep(1)
                         driver.find_element(By.XPATH,'.//textarea[@class="Form_input_3JT2Q"]').send_keys(d)
                     time.sleep(3)
                     # 点击同时转发
