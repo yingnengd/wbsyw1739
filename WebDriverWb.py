@@ -4,7 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import time
 from selenium.webdriver.common.by import By
 import json,os
-import random
+import random,traceback
 # import psutil
 import re,os,requests
 from selenium.webdriver.common.action_chains import ActionChains
@@ -285,7 +285,12 @@ class WebDriver(DriverOptions):
                 zzf = driver.find_element(By.XPATH,'.//a[@class="s-btn-a"]')
                 driver.execute_script("arguments[0].click();", zzf)
                 print("转发成功")
-        except:driver.quit()
+        except Exception as e:
+            print(e.args)
+            print('======')
+            print(traceback.format_exc())
+        finally:
+            driver.quit()
 
     def pic_list(self):
         time.sleep(1)
