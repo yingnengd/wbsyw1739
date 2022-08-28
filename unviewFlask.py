@@ -23,7 +23,7 @@ class Config(object):  # 创建配置，用类
             # 'args': (1, 2),
             'trigger': 'cron',
             'timezone':"Asia/Shanghai",
-            'day_of_week':'mon-fri',
+            'day_of_week':'mon-sat',
             'hour':'6-23',
             'minute':'{}'.format(m),
             'second':'{}'.format(s)
@@ -34,7 +34,7 @@ class Config(object):  # 创建配置，用类
             'func': '__main__:job1',
             # 'args': (3, 4),#这是要输入函数的变量
             'trigger': 'cron',
-            'day_of_week':'mon-fri',
+            'day_of_week':'mon-sat',
             'timezone':"Asia/Shanghai",
             'day_of_week':'mon-fri', 
             'hour':'23',
