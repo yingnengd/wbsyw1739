@@ -159,13 +159,14 @@ class WebDriver(DriverOptions):
 
     # --------------------搜微博热搜后追踪---------------------------
     def selenium_chrome_test(self): 
+        time.sleep(1)
+        broswer = self.broswer_initial('https://s.weibo.com/top/summary?cate=realtimehot')
+        time.sleep(6)
+        self.log_csdn(broswer)
+        time.sleep(5)
+        broswer.refresh()
+
         try:
-            time.sleep(1)
-            broswer = self.broswer_initial('https://s.weibo.com/top/summary?cate=realtimehot')
-            time.sleep(6)
-            self.log_csdn(broswer)
-            time.sleep(5)
-            broswer.refresh()
             time.sleep(3)
             eles = broswer.find_elements(By.XPATH,'//tbody//tr')
             jf = open("hot.json",'r',encoding = 'utf-8')
@@ -204,15 +205,14 @@ class WebDriver(DriverOptions):
             broswer.quit()
 
     def retweet_comment(self,v):
+        time.sleep(5)
+        broswer = self.broswer_initial(v)
+        time.sleep(6)
+        self.log_csdn(broswer)
+        time.sleep(5)
+        broswer.refresh()
+        time.sleep(3)
         try:
-            time.sleep(5)
-            broswer = self.broswer_initial(v)
-            time.sleep(6)
-            self.log_csdn(broswer)
-            time.sleep(5)
-            broswer.refresh()
-            time.sleep(3)
-            
             self.roll_target(broswer)
             time.sleep(10)
             # 点赞
