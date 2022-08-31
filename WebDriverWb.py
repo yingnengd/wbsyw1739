@@ -191,12 +191,15 @@ class WebDriver(DriverOptions):
                 jfile = open("hot.json",'w+',encoding = 'utf-8')
                     #即添加参数 ensure_ascii=False，它默认的是Ture
                 json.dump(diclists,jfile,ensure_ascii=False,indent=4)
-                jfile.close()       
-            except Exception as e:
-                print(e.args)
+                jfile.close()
+            except Exception as c:
+                print(c.args)
                 print('======')
                 print(traceback.format_exc())
-            time.sleep(2)
+        except Exception as d:
+            print(d.args)
+            print('======')
+            print(traceback.format_exc())
         finally:
             broswer.quit()
 
