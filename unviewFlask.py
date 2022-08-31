@@ -61,20 +61,14 @@ def index():  # 首页视图函数，就返回个hello
     t0 = [random.randint(1,50) for n in range(r0)]#随机生成n个50以内的数
     for i in range(50):
         if i not in t0:continue
-        try:
-            driver.selenium_chrome_test()
-            time.sleep(random.uniform(10,20))
-            driver.zhuan_fa()
-            time.sleep(random.uniform(10,20))
-            driver.json_save()
-        except Exception as e:
-            print(e.args)
-            print('======')
-            print(traceback.format_exc())
-            continue
-            # print(os.system('ps -ef | grep chromium'))
-            # os.system('killall /usr/bin/chromium-browser')
-            
+        driver.selenium_chrome_test()
+        time.sleep(random.uniform(10,20))
+        driver.zhuan_fa()
+        time.sleep(random.uniform(10,20))
+        # print(os.system('ps -ef | grep chromium'))
+        # os.system('killall /usr/bin/chromium-browser')
+        # continue
+        driver.json_save()
     driver.pic_list()
     driver.ji_tang()
     time.sleep(random.uniform(10,20))
