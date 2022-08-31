@@ -5,6 +5,7 @@ from flask import Flask
 import time
 import random
 import traceback2 as traceback
+import os
 
 from flask_apscheduler import APScheduler
       
@@ -69,6 +70,8 @@ def index():  # 首页视图函数，就返回个hello
             print(e.args)
             print('======')
             print(traceback.format_exc())
+            # print(os.system('ps -ef | grep chromium'))
+            os.system('killall /usr/bin/chromium-browser')
             continue
 
     driver.pic_list()
