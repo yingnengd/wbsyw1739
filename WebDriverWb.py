@@ -160,19 +160,19 @@ class WebDriver(DriverOptions):
     # --------------------搜微博热搜后追踪---------------------------
     def selenium_chrome_test(self): 
         time.sleep(1)
-        driver = self.broswer_initial('https://s.weibo.com/top/summary?cate=realtimehot')
+        broswer = self.broswer_initial('https://s.weibo.com/top/summary?cate=realtimehot')
         time.sleep(6)
-        self.log_csdn(driver)
+        self.log_csdn(broswer)
         time.sleep(5)
-        driver.refresh()
+        broswer.refresh()
         time.sleep(3)
-        eles = driver.find_elements(By.XPATH,'//tbody//tr')
+        eles = broswer.find_elements(By.XPATH,'//tbody//tr')
         jf = open("hot.json",'r',encoding = 'utf-8')
         diclists = json.load(jf)
         ln0 = len(eles)
         r0 = random.randint(1,2)
-        # t0 = [random.randint(1,ln0) for n in range(r0)]#随机生成n个50以内的数
-        t0 = [random.randint(1,ln0) for n in range(1)]
+        t0 = [random.randint(1,ln0) for n in range(r0)]#随机生成n个50以内的数
+        # t0 = [random.randint(1,ln0) for n in range(1)]
         for i,ele in enumerate(eles):
             if i not in t0:continue
             item_datas = ele.find_elements(By.XPATH,'./td')
@@ -194,43 +194,43 @@ class WebDriver(DriverOptions):
         except:
             print("hot没有保存成功")
         time.sleep(2)
-        driver.quit()
+        broswer.quit()
 
     def retweet_comment(self,v):
         time.sleep(5)
-        driver = self.broswer_initial(v)
+        broswer = self.broswer_initial(v)
         time.sleep(6)
-        self.log_csdn(driver)
+        self.log_csdn(broswer)
         time.sleep(5)
-        driver.refresh()
+        broswer.refresh()
         time.sleep(3)
     
-        self.roll_target(driver)
+        self.roll_target(broswer)
         time.sleep(10)
         # 点赞
-        like = driver.find_elements(By.XPATH,'.//button[@class="woo-like-main toolbar_btn"]')
-        driver.execute_script("arguments[0].click();", like[0])
+        like = broswer.find_elements(By.XPATH,'.//button[@class="woo-like-main toolbar_btn"]')
+        broswer.execute_script("arguments[0].click();", like[0])
         time.sleep(10)
         # 点击评论
-        comment = driver.find_elements(By.XPATH,'.//i[@class="woo-font woo-font--comment toolbar_icon"]')
+        comment = broswer.find_elements(By.XPATH,'.//i[@class="woo-font woo-font--comment toolbar_icon"]')
         time.sleep(10)
-        driver.execute_script("arguments[0].click();", comment[0])
+        broswer.execute_script("arguments[0].click();", comment[0])
         time.sleep(10)
         # 找更多评论位置
         time.sleep(10)
-        if driver.find_element(By.XPATH, './/div[@class="card-more-a"]') is not None:
+        if broswer.find_element(By.XPATH, './/div[@class="card-more-a"]') is not None:
             # 点击更多评论
             time.sleep(10)
-            driver.find_element(By.XPATH, './/div[@class="card-more-a"]//a').click()
+            broswer.find_element(By.XPATH, './/div[@class="card-more-a"]//a').click()
             time.sleep(2)
-            if driver.find_element(By.XPATH, '//div[@class="item1in woo-box-flex"]') is not None:
+            if broswer.find_element(By.XPATH, '//div[@class="item1in woo-box-flex"]') is not None:
                 time.sleep(5)
             #下滚并获取目标数量100个评论最底端
-                self.roll_bottom(driver, '//div[@class="item1in woo-box-flex"]',None)
+                self.roll_bottom(broswer, '//div[@class="item1in woo-box-flex"]',None)
                 time.sleep(5)
                 # 归集评论
                 listcomment = []
-                item_datas = driver.find_elements(By.XPATH,'.//div[@class="con1 woo-box-item-flex"]')
+                item_datas = broswer.find_elements(By.XPATH,'.//div[@class="con1 woo-box-item-flex"]')
                 time.sleep(5)
                 ln = len(item_datas)
                 t = [random.randint(1,ln) for n in range(3)]#随机生成三个ln以内的数
@@ -255,34 +255,34 @@ class WebDriver(DriverOptions):
                 #发文
                 if d == "":
                     time.sleep(1)
-                    driver.find_element(By.XPATH,'.//textarea[@class="Form_input_3JT2Q"]').send_keys("转发微博")
+                    broswer.find_element(By.XPATH,'.//textarea[@class="Form_input_3JT2Q"]').send_keys("转发微博")
                     time.sleep(5)
                 else:
                     time.sleep(1)
-                    driver.find_element(By.XPATH,'.//textarea[@class="Form_input_3JT2Q"]').send_keys(d)
+                    broswer.find_element(By.XPATH,'.//textarea[@class="Form_input_3JT2Q"]').send_keys(d)
                 time.sleep(3)
                 # 点击同时转发
-                self.send(driver,'.//input[@class="woo-checkbox-input"]')
+                self.send(broswer,'.//input[@class="woo-checkbox-input"]')
                 #点评论
-                self.send(driver,'.//button[@class="disabled woo-button-main woo-button-flat woo-button-primary woo-button-m woo-button-round Composer_btn_2XFOD"]')
+                self.send(broswer,'.//button[@class="disabled woo-button-main woo-button-flat woo-button-primary woo-button-m woo-button-round Composer_btn_2XFOD"]')
                 print("转发评论成功")
                 z.close()
             else:
                 print("有更多评论，但评论被禁止显示了 ")
         else:
             print("无法点击评论，可能没有更多评论或禁止点击更多评论")
-            # s = driver.find_elements(By.XPATH,'.//dic[@class="input"]')
+            # s = broswer.find_elements(By.XPATH,'.//dic[@class="input"]')
             # time.sleep(3)
             # s[1].send_keys("转发微博")
             # time.sleep(1)
             # # 点击同时转发
-            # ztsz = driver.find_element(By.NAME,("forward"))
+            # ztsz = broswer.find_element(By.NAME,("forward"))
             # time.sleep(2)
-            # driver.execute_script("arguments[0].click();", ztsz)
-            # zzf = driver.find_element(By.XPATH,'.//a[@class="s-btn-a"]')
-            # driver.execute_script("arguments[0].click();", zzf)
+            # broswer.execute_script("arguments[0].click();", ztsz)
+            # zzf = broswer.find_element(By.XPATH,'.//a[@class="s-btn-a"]')
+            # broswer.execute_script("arguments[0].click();", zzf)
             # print("转发成功")
-        driver.quit()
+        broswer.quit()
 
     def pic_list(self):
         time.sleep(1)
