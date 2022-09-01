@@ -175,9 +175,9 @@ class WebDriver(DriverOptions):
         # te = [random.randrange(3, lne, r0) for i in range(2)]#随机生成2个50以内的数,步长为1
         # sample(range(10000000), k=60)
         if lne > r0
-            te = random.sample(range(lne)), k=r0)
+            te = random.sample(range(lne), k=r0)
         else:
-            te = random.sample(range(50)), k=r0)
+            te = random.sample(range(50), k=r0)
         for i,ele in enumerate(eles):
             if i not in te:continue
             item_datas = ele.find_elements(By.XPATH,'./td')
