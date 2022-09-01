@@ -171,9 +171,9 @@ class WebDriver(DriverOptions):
         jf = open("hot.json",'r',encoding = 'utf-8')
         diclists = json.load(jf)
         lne = len(eles)
-        # r0 = random.randint(1,3)
+        r0 = random.randint(1,3)
         # t0 = [random.randint(1,lne) for n in range(r0)]#随机生成n个50以内的数
-        te = [random.randrange(1, lne, 1) for i in range(2)]#随机生成2个50以内的数,步长为1
+        te = [random.randrange(3, lne, r0) for i in range(2)]#随机生成2个50以内的数,步长为1
         for i,ele in enumerate(eles):
             if i not in te:continue
             item_datas = ele.find_elements(By.XPATH,'./td')
