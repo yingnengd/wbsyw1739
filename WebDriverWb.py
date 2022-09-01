@@ -119,7 +119,7 @@ class WebDriver(DriverOptions):
         # 获取页面元素量
         result = driver.find_elements(By.XPATH,ele)
         count= len(result)
-        print("经过5次滚动，页面高度是{}，共{}个目标在页面。".format(height,count))
+        # print("经过5次滚动，页面高度是{}，共{}个目标在页面。".format(height,count))
 
     from ast import Return
 
@@ -171,17 +171,19 @@ class WebDriver(DriverOptions):
         jf = open("hot.json",'r',encoding = 'utf-8')
         diclists = json.load(jf)
         lne = len(eles)
-        r0 = random.randint(1,3)
+        r0 = random.randint(2,12)
         # t0 = [random.randint(1,lne) for n in range(r0)]#随机生成n个50以内的数
-        te = [random.randrange(3, lne, r0) for i in range(2)]#随机生成2个50以内的数,步长为1
+        # te = [random.randrange(3, lne, r0) for i in range(2)]#随机生成2个50以内的数,步长为1
+        # sample(range(10000000), k=60) 
+        te = random.sample(lne, k=r0) 
         for i,ele in enumerate(eles):
             if i not in te:continue
             item_datas = ele.find_elements(By.XPATH,'./td')
             title = item_datas[1].text
             title = item_datas[1].find_element(By.XPATH,'./a').get_attribute('text')
-            print(title)
+            # print(title)
             href = item_datas[1].find_element(By.XPATH,'./a').get_attribute('href')
-            print(href)
+            # print(href)
             data = {"标题":title,"链接":href}
             if not any(d.get("标题",None) == title for d in diclists):#不存在KEY用这个
                 diclists.append(data)
@@ -230,7 +232,8 @@ class WebDriver(DriverOptions):
                 item_datas = broswer.find_elements(By.XPATH,'.//div[@class="con1 woo-box-item-flex"]')
                 time.sleep(5)
                 ln = len(item_datas)
-                t = [random.randint(1,ln) for n in range(3)]#随机生成三个ln以内的数
+                # r1 = random.randint(1,3)
+                t = random.sample(ln, k=3)#随机生成三个ln以内的数
                 for i, v in enumerate(item_datas): 
                     if i not in t:continue
                     item_data =v.find_element(By.XPATH,'.//div[@class="text"]//span').get_attribute('innerHTML')
@@ -238,7 +241,7 @@ class WebDriver(DriverOptions):
                     datas = re.findall('[\u4e00-\u9fa5]+', item_data)
                     for data in datas:
                         if data is None:continue
-                        print(data)
+                        # print(data)
                         listcomment.append(data)
                 c = open("txt/comment.txt", 'w+', encoding = "utf-8")
                 for l in listcomment:
@@ -298,12 +301,12 @@ class WebDriver(DriverOptions):
         self.roll_bottom(broswer, './/article', 'L')
         ids = [i for i in broswer.find_elements(By.XPATH,'.//article//a[@class="Link_link__mTUkz spacing_noMargin__Q_PsJ"]')]
         ln = len(ids)
-        r = random.randint(2, 6)
-        t = [random.randint(1,ln) for n in range(r)]#随机生成n个ln以内的数
+        r2 = random.randint(2, 6)
+        t2 = random.sample(ln, k=r2)#随机生成三个ln以内的数#随机生成n个ln以内的数
         for i, v in enumerate(ids): 
-            if i in t:
+            if i in t2:
                 id = v.get_attribute('href').split('/')[5]
-                print(id)
+                # print(id)
             else:continue
             picurl= 'https://images.pexels.com/photos/%s/pexels-photo-%s.jpeg?cs=srgb&amp'%(id,id)
             try:
@@ -311,7 +314,7 @@ class WebDriver(DriverOptions):
                 r.status_code
                 p = open('images/%s.jpeg'%id, "wb")
                 p.write(r.content)
-                print('%s保存成功'%id)
+                # print('%s保存成功'%id)
                 piclist.append(r"%s/images/%s.jpeg"%(os.path.abspath(os.path.dirname(__file__)),id))
                 p.close()
             except:print("图片链接失败")
@@ -436,16 +439,17 @@ class WebDriver(DriverOptions):
                         listcomment = []
                         item_datas = broswer.find_elements(By.XPATH,'.//div[@class="con1 woo-box-item-flex"]')
                         time.sleep(5)
-                        ln = len(item_datas)
-                        t = [random.randint(1,ln) for n in range(3)]#随机生成三个ln以内的数
+                        ln3 = len(item_datas)
+                        # r1 = random.randint(1,3)
+                        t3 = random.sample(ln3, k=3)#随机生成三个ln以内的数
                         for i, v in enumerate(item_datas): 
-                            if i not in t:continue
+                            if i not in t3:continue
                             item_data =v.find_element(By.XPATH,'.//div[@class="text"]//span').get_attribute('innerHTML')
                             time.sleep(5)
                             datas = re.findall('[\u4e00-\u9fa5]+', item_data)
                             for data in datas:
                                 if data is None:continue
-                                print(data)
+                                # print(data)
                                 listcomment.append(data)
                         c = open("txt/comment.txt", 'w+', encoding = "utf-8")
                         for l in listcomment:
