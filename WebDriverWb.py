@@ -403,8 +403,10 @@ class WebDriver(DriverOptions):
                         print('======')
                         print(traceback.format_exc())
                     finally:
-                        os.system('killall /usr/bin/chromium-browser')
-                        os.system('killall /usr/bin/chromedriver')
+                        os.system('killall chromium-browser')
+                        os.system('killall chromedriver')
+                        # os.system('killall /usr/bin/chromium-browser')
+                        # os.system('killall /usr/bin/chromedriver')
 
 
     def json_save(self):
