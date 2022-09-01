@@ -1,4 +1,5 @@
 # -- coding: utf-8 --**
+from curses import termattrs
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
@@ -169,12 +170,12 @@ class WebDriver(DriverOptions):
         eles = broswer.find_elements(By.XPATH,'//tbody//tr')
         jf = open("hot.json",'r',encoding = 'utf-8')
         diclists = json.load(jf)
-        ln0 = len(eles)
+        lne = len(eles)
         # r0 = random.randint(1,3)
-        # t0 = [random.randint(1,ln0) for n in range(r0)]#随机生成n个50以内的数
-        t0 = [random.randint(1,ln0) for n in range(2)]
+        # t0 = [random.randint(1,lne) for n in range(r0)]#随机生成n个50以内的数
+        te = [random.randrange(1, lne, 1) for i in range(2)]#随机生成2个50以内的数,步长为1
         for i,ele in enumerate(eles):
-            if i not in t0:continue
+            if i not in te:continue
             item_datas = ele.find_elements(By.XPATH,'./td')
             title = item_datas[1].text
             title = item_datas[1].find_element(By.XPATH,'./a').get_attribute('text')
