@@ -170,7 +170,7 @@ class WebDriver(DriverOptions):
         jf = open("hot.json",'r',encoding = 'utf-8')
         diclists = json.load(jf)
         ln0 = len(eles)
-        r0 = random.randint(2,3)
+        r0 = random.randint(1,3)
         t0 = [random.randint(1,ln0) for n in range(r0)]#随机生成n个50以内的数
         # t0 = [random.randint(1,ln0) for n in range(1)]
         try:
