@@ -386,6 +386,13 @@ class WebDriver(DriverOptions):
         broswer.quit()
                
     def zhuan_fa(self):
+        time.sleep(2)
+        broswer = self.broswer_initial('https://weibo.com/login.php')
+        time.sleep(6)
+        self.log_csdn(broswer)
+        time.sleep(5)
+        broswer.refresh()
+        time.sleep(3)
         with open('hot.json', 'r', encoding='utf-8') as f2:
             info_res = json.load(f2)
         with open("hotRetweeted.json",'r',encoding = 'utf-8') as f3:
@@ -395,18 +402,101 @@ class WebDriver(DriverOptions):
                 if ("https://" not in value):
                     continue
                 if not any(d.get("链接",None) == value for d in hotReDics):#如有不相同的网址，value则执行
+                    # time.sleep(2)
+                    # broswer = self.broswer_initial(value)
+                    # time.sleep(6)
+                    # self.log_csdn(broswer)
+                    # time.sleep(5)
+                    # broswer.refresh()
+                    # time.sleep(3)
+                    self.open_tab(broswer,value)
+                    time.sleep(6)
+                    broswer.refresh()
+                    time.sleep(3)
+                    self.roll_target(broswer)
+                    time.sleep(10)
+                    # 点赞
+                    like = broswer.find_elements(By.XPATH,'.//button[@class="woo-like-main toolbar_btn"]')
+                    broswer.execute_script("arguments[0].click();", like[0])
+                    time.sleep(10)
+                    # 点击评论
+                    comment = broswer.find_elements(By.XPATH,'.//i[@class="woo-font woo-font--comment toolbar_icon"]')
+                    time.sleep(10)
+                    broswer.execute_script("arguments[0].click();", comment[0])
+                    time.sleep(10)
+                    # 找更多评论位置
+                    time.sleep(10)
+                    if broswer.find_element(By.XPATH, './/div[@class="card-more-a"]') is not None:
+                        # 点击更多评论
+                        time.sleep(10)
+                        broswer.find_element(By.XPATH, './/div[@class="card-more-a"]//a').click()
+                        time.sleep(2)
+                        if broswer.find_element(By.XPATH, '//div[@class="item1in woo-box-flex"]') is not None:
+                            time.sleep(5)
+                        #下滚并获取目标数量100个评论最底端
+                            self.roll_bottom(broswer, '//div[@class="item1in woo-box-flex"]',None)
+                            time.sleep(5)
+                            # 归集评论
+                            listcomment = []
+                            item_datas = broswer.find_elements(By.XPATH,'.//div[@class="con1 woo-box-item-flex"]')
+                            time.sleep(5)
+                            ln = len(item_datas)
+                            t = [random.randint(1,ln) for n in range(3)]#随机生成三个ln以内的数
+                            for i, v in enumerate(item_datas): 
+                                if i not in t:continue
+                                item_data =v.find_element(By.XPATH,'.//div[@class="text"]//span').get_attribute('innerHTML')
+                                time.sleep(5)
+                                datas = re.findall('[\u4e00-\u9fa5]+', item_data)
+                                for data in datas:
+                                    if data is None:continue
+                                    print(data)
+                                    listcomment.append(data)
+                            c = open("txt/comment.txt", 'w+', encoding = "utf-8")
+                            for l in listcomment:
+                                c.write(l+',')
+                            c.close()
+                            z = open("txt/comment.txt", 'r', encoding = "utf-8")
+                            d = z.read()
+                            # 滑动到发送处
+                            # target = self.broswer.find_element(By.XPATH,'.//input[@class="woo-checkbox-input"]')
+                            # self.broswer.execute_script("arguments[0].scrollIntoView(true);", target)
+                            #发文
+                            if d == "":
+                                time.sleep(1)
+                                broswer.find_element(By.XPATH,'.//textarea[@class="Form_input_3JT2Q"]').send_keys("转发微博")
+                                time.sleep(5)
+                            else:
+                                time.sleep(1)
+                                broswer.find_element(By.XPATH,'.//textarea[@class="Form_input_3JT2Q"]').send_keys(d)
+                            time.sleep(3)
+                            # 点击同时转发
+                            self.send(broswer,'.//input[@class="woo-checkbox-input"]')
+                            #点评论
+                            self.send(broswer,'.//button[@class="disabled woo-button-main woo-button-flat woo-button-primary woo-button-m woo-button-round Composer_btn_2XFOD"]')
+                            print("转发评论成功")
+                            z.close()
+                        else:
+                            print("有更多评论，但评论被禁止显示了 ")
+                    else:
+                        print("无法点击评论，可能没有更多评论或禁止点击更多评论")
+                    time.sleep(2)
+                    broswer.close()
+                    handles = broswer.window_handles          #获取当前浏览器的所有窗口句柄
+                    broswer.switch_to.window(handles[0])
+        broswer.quit()
                     # self.open_tab(value)
-                    try:
-                        self.retweet_comment(value)
-                    except Exception as e:
-                        print(e.args)
-                        print('======')
-                        print(traceback.format_exc())
-                    finally:
-                        os.system('killall chromium-browser')
-                        os.system('killall chromedriver')
+                    # try:
+                    #     # self.retweet_comment(value)
+                    # except Exception as e:
+                    #     print(e.args)
+                    #     print('======')
+                    #     print(traceback.format_exc())
+                    # finally:
+                    #     os.system('killall chromium-browser')
+                    #     os.system('killall chromedriver')
                         # os.system('killall /usr/bin/chromium-browser')
                         # os.system('killall /usr/bin/chromedriver')
+                    
 
 
     def json_save(self):
