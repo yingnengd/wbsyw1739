@@ -65,17 +65,19 @@ def index():  # 首页视图函数，就返回个hello
         # if i not in t0:continue
     try:
         driver.selenium_chrome_test()
-        time.sleep(random.uniform(10,20))
+        time.sleep(random.uniform(2,10))
         driver.zhuan_fa()
-        time.sleep(random.uniform(10,20))
+        time.sleep(random.uniform(2,10))
     except Exception as e:
         print(e.args)
         print('======')
         print(traceback.format_exc())
     driver.json_save()
+    time.sleep(random.uniform(1,2))
     driver.pic_list()
+    time.sleep(random.uniform(1,2))
     driver.ji_tang()
-    time.sleep(random.uniform(10,20))
+    time.sleep(random.uniform(2,10))
 
 if __name__ == '__main__':
     scheduler = APScheduler()  # 实例化APScheduler

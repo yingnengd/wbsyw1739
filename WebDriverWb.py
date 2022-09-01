@@ -1,5 +1,4 @@
 # -- coding: utf-8 --**
-from curses import termattrs
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
@@ -174,16 +173,19 @@ class WebDriver(DriverOptions):
         r0 = random.randint(2,12)
         # t0 = [random.randint(1,lne) for n in range(r0)]#随机生成n个50以内的数
         # te = [random.randrange(3, lne, r0) for i in range(2)]#随机生成2个50以内的数,步长为1
-        # sample(range(10000000), k=60) 
-        te = random.sample(lne, k=r0) 
+        # sample(range(10000000), k=60)
+        if lne > r0
+            te = random.sample(range(lne)), k=r0)
+        else:
+            te = random.sample(range(50)), k=r0)
         for i,ele in enumerate(eles):
             if i not in te:continue
             item_datas = ele.find_elements(By.XPATH,'./td')
             title = item_datas[1].text
             title = item_datas[1].find_element(By.XPATH,'./a').get_attribute('text')
-            # print(title)
+            print(title)
             href = item_datas[1].find_element(By.XPATH,'./a').get_attribute('href')
-            # print(href)
+            print(href)
             data = {"标题":title,"链接":href}
             if not any(d.get("标题",None) == title for d in diclists):#不存在KEY用这个
                 diclists.append(data)
@@ -233,7 +235,7 @@ class WebDriver(DriverOptions):
                 time.sleep(5)
                 ln = len(item_datas)
                 # r1 = random.randint(1,3)
-                t = random.sample(ln, k=3)#随机生成三个ln以内的数
+                t = random.sample(range(ln), k=3)#随机生成三个ln以内的数
                 for i, v in enumerate(item_datas): 
                     if i not in t:continue
                     item_data =v.find_element(By.XPATH,'.//div[@class="text"]//span').get_attribute('innerHTML')
@@ -302,12 +304,12 @@ class WebDriver(DriverOptions):
         ids = [i for i in broswer.find_elements(By.XPATH,'.//article//a[@class="Link_link__mTUkz spacing_noMargin__Q_PsJ"]')]
         ln = len(ids)
         r2 = random.randint(2, 6)
-        t2 = random.sample(ln, k=r2)#随机生成三个ln以内的数#随机生成n个ln以内的数
+        t2 = random.sample(range(ln), k=r2)#随机生成三个ln以内的数#随机生成n个ln以内的数
         for i, v in enumerate(ids): 
-            if i in t2:
-                id = v.get_attribute('href').split('/')[5]
+            if i not in t2:continue
+            id = v.get_attribute('href').split('/')[5]
                 # print(id)
-            else:continue
+            # else:continue
             picurl= 'https://images.pexels.com/photos/%s/pexels-photo-%s.jpeg?cs=srgb&amp'%(id,id)
             try:
                 r = requests.get(picurl)
@@ -441,7 +443,7 @@ class WebDriver(DriverOptions):
                         time.sleep(5)
                         ln3 = len(item_datas)
                         # r1 = random.randint(1,3)
-                        t3 = random.sample(ln3, k=3)#随机生成三个ln以内的数
+                        t3 = random.sample(range(ln3), k=3)#随机生成三个ln以内的数
                         for i, v in enumerate(item_datas): 
                             if i not in t3:continue
                             item_data =v.find_element(By.XPATH,'.//div[@class="text"]//span').get_attribute('innerHTML')
