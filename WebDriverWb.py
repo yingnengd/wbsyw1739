@@ -174,10 +174,9 @@ class WebDriver(DriverOptions):
         # t0 = [random.randint(1,lne) for n in range(r0)]#随机生成n个50以内的数
         # te = [random.randrange(3, lne, r0) for i in range(2)]#随机生成2个50以内的数,步长为1
         # sample(range(10000000), k=60)
-        if lne > r0:
-            te = random.sample(range(lne), k=r0)
-        else:
-            te = random.sample(range(50), k=r0)
+        time.sleep(2)
+        te = random.sample(range(lne), k=r0)
+        time.sleep(2)
         for i,ele in enumerate(eles):
             if i not in te:continue
             item_datas = ele.find_elements(By.XPATH,'./td')
@@ -236,6 +235,7 @@ class WebDriver(DriverOptions):
                 ln = len(item_datas)
                 # r1 = random.randint(1,3)
                 t = random.sample(range(ln), k=3)#随机生成三个ln以内的数
+                time.sleep(2)
                 for i, v in enumerate(item_datas): 
                     if i not in t:continue
                     item_data =v.find_element(By.XPATH,'.//div[@class="text"]//span').get_attribute('innerHTML')
@@ -305,6 +305,7 @@ class WebDriver(DriverOptions):
         ln = len(ids)
         r2 = random.randint(2, 6)
         t2 = random.sample(range(ln), k=r2)#随机生成三个ln以内的数#随机生成n个ln以内的数
+        time.sleep(2)
         for i, v in enumerate(ids): 
             if i not in t2:continue
             id = v.get_attribute('href').split('/')[5]
@@ -444,6 +445,7 @@ class WebDriver(DriverOptions):
                         ln3 = len(item_datas)
                         # r1 = random.randint(1,3)
                         t3 = random.sample(range(ln3), k=3)#随机生成三个ln以内的数
+                        time.sleep(2)
                         for i, v in enumerate(item_datas): 
                             if i not in t3:continue
                             item_data =v.find_element(By.XPATH,'.//div[@class="text"]//span').get_attribute('innerHTML')
