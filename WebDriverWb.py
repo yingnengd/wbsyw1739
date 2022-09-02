@@ -170,7 +170,7 @@ class WebDriver(DriverOptions):
         jf = open("hot.json",'r',encoding = 'utf-8')
         diclists = json.load(jf)
         lne = len(eles)
-        r0 = random.randint(2,12)
+        r0 = random.randint(2,3)
         # t0 = [random.randint(1,lne) for n in range(r0)]#随机生成n个50以内的数
         # te = [random.randrange(3, lne, r0) for i in range(2)]#随机生成2个50以内的数,步长为1
         # sample(range(10000000), k=60)
