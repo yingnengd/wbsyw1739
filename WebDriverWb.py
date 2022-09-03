@@ -182,9 +182,9 @@ class WebDriver(DriverOptions):
             item_datas = ele.find_elements(By.XPATH,'./td')
             title = item_datas[1].text
             title = item_datas[1].find_element(By.XPATH,'./a').get_attribute('text')
-            print(title)
+            # print(title)
             href = item_datas[1].find_element(By.XPATH,'./a').get_attribute('href')
-            print(href)
+            # print(href)
             data = {"标题":title,"链接":href}
             if not any(d.get("标题",None) == title for d in diclists):#不存在KEY用这个
                 diclists.append(data)
@@ -267,7 +267,7 @@ class WebDriver(DriverOptions):
                 self.send(broswer,'.//input[@class="woo-checkbox-input"]')
                 #点评论
                 self.send(broswer,'.//button[@class="disabled woo-button-main woo-button-flat woo-button-primary woo-button-m woo-button-round Composer_btn_2XFOD"]')
-                print("转发评论成功")
+                # print("转发评论成功")
                 z.close()
             else:
                 print("有更多评论，但评论被禁止显示了 ")
@@ -296,7 +296,7 @@ class WebDriver(DriverOptions):
             urls.append(l)
         u.close()
         classurl = random.choice(urls)
-        print(classurl)
+        # print(classurl)
         time.sleep(2)
         broswer = self.broswer_initial(classurl)
         self.enable_download_in_headless_chrome(broswer, "images")
@@ -477,7 +477,7 @@ class WebDriver(DriverOptions):
                         self.send(broswer,'.//input[@class="woo-checkbox-input"]')
                         #点评论
                         self.send(broswer,'.//button[@class="disabled woo-button-main woo-button-flat woo-button-primary woo-button-m woo-button-round Composer_btn_2XFOD"]')
-                        print("转发评论成功")
+                        # print("转发评论成功")
                         z.close()
                     else:
                         print("有更多评论，但评论被禁止显示了 ")

@@ -12,8 +12,8 @@ from flask_apscheduler import APScheduler
 # if __name__ == '__main__':
     # app.run(host='0.0.0.0', port=8080)
     
-m = random.randint(28,31)
-s = random.randint(1,59)
+m = random.randint(1,3)
+s = random.randint(1,20)
 mm = random.randint(56,59)
 
 class Config(object):  # 创建配置，用类
