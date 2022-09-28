@@ -25,7 +25,7 @@ class Config(object):  # 创建配置，用类
             'trigger': 'cron',
             'timezone':"Asia/Shanghai",
             'day_of_week':'mon-sat',
-            'hour':'6-23',
+            'hour':'5-23',
             'minute':'{}'.format(m),
             'second':'{}'.format(s)
             #'second':'5'
@@ -37,7 +37,7 @@ class Config(object):  # 创建配置，用类
             'trigger': 'cron',
             'timezone':"Asia/Shanghai",
             'day_of_week':'mon-sat', 
-            'hour':'23',
+            'hour':'5-23',
             'minute':'{}'.format(mm)
             # 'day':'1'
             # 'second':'59'
@@ -57,18 +57,18 @@ app.config.from_object(Config())  # 为实例化的flask引入配置
 
 @app.route('/')  # 首页路由
 def index():  # 首页视图函数，就返回个hello
-    r0 = random.randint(2,4)
-    for i in range(r0):
-        try:
-            driver.selenium_chrome_test()
-            time.sleep(random.uniform(1,3))
-            driver.zhuan_fa()
-            time.sleep(random.uniform(1,3))
-        except Exception as e:
-            print(e.args)
-            print('======')
-            print(traceback.format_exc())
-        driver.json_save()
+    # r0 = random.randint(2,4)
+    # for i in range(r0):
+    try:
+        driver.selenium_chrome_test()
+        time.sleep(random.uniform(1,3))
+        driver.zhuan_fa()
+        time.sleep(random.uniform(1,3))
+    except Exception as e:
+        print(e.args)
+        print('======')
+        print(traceback.format_exc())
+    driver.json_save()
     time.sleep(random.uniform(1,3))
     driver.pic_list()
     time.sleep(random.uniform(1,3))
